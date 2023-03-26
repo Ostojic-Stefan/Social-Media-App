@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Data.Models;
 
 #nullable disable
@@ -9,5 +11,7 @@ public class Post : BaseEntity
     public string Slug { get; set; }
     public User User { get; set; }
     public List<Comment> Comments { get; set; }
+
+    [Required]
     public Sub Sub { get; set; }
 }

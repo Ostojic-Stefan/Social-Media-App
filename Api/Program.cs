@@ -1,7 +1,12 @@
+using Api.Middleware;
 using Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddLogging();
+
+builder.Services.AddScoped<GlobalExceptionMiddleware>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -13,9 +18,7 @@ builder.Services.AddDbContext<AppDbContext>((DbContextOptionsBuilder options) =>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-}
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
